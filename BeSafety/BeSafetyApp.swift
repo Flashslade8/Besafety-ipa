@@ -4,20 +4,38 @@ import GoogleSignIn
 
 @main
 struct BeSafetyApp: App {
-    @StateObject private var auth: AuthViewModel
-
-    init() {
+    static let configured: Bool = {
+        guard Bundle.main.path(forResource: "GoogleService-Info", ofType: "plist") != nil else {
+            return false
+        }
         FirebaseApp.configure()
-        _auth = StateObject(wrappedValue: AuthViewModel())
-    }
+        return true
+    }()
 
     var body: some Scene {
         WindowGroup {
-            RootView()
-                .environmentObject(auth)
-                .onOpenURL { url in
-                    GIDSignIn.sharedInstance.handle(url)
+            if Self.configured {
+                AppRoot()
+            } else {
+                VStack(spacing: 12) {
+                    Text("Setup problem").font(.title.bold())
+                    Text("GoogleService-Info.plist is missing from the app. Check it is inside the BeSafety folder in GitHub, then rebuild.")
+                        .multilineTextAlignment(.center)
                 }
+                .padding()
+            }
         }
+    }
+}
+
+struct AppRoot: View {
+    @StateObject private var auth = AuthViewModel()
+
+    var body: some View {
+        RootView()
+            .environmentObject(auth)
+            .onOpenURL { url in
+                GIDSignIn.sharedInstance.handle(url)
+            }
     }
 }
