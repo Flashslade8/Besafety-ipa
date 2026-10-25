@@ -1,0 +1,20 @@
+name: BeSafety
+options:
+  bundleIdPrefix: za.co.besafety
+targets:
+  BeSafety:
+    type: application
+    platform: iOS
+    deploymentTarget: "16.0"
+    sources: [BeSafety]
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: za.co.besafety.app
+        GENERATE_INFOPLIST_FILE: YES
+        INFOPLIST_KEY_UIApplicationSceneManifest_Generation: YES
+        INFOPLIST_KEY_UILaunchScreen_Generation: YES
+        INFOPLIST_KEY_NSLocationWhenInUseUsageDescription: "BeSafety uses your location to find chaperones near you."
+        INFOPLIST_KEY_UISupportedInterfaceOrientations: UIInterfaceOrientationPortrait
+        MARKETING_VERSION: "1.0"
+        CURRENT_PROJECT_VERSION: "1"
+        SWIFT_VERSION: "5.0"
