@@ -25,7 +25,7 @@ final class LocationManager: NSObject, ObservableObject, CLLocationManagerDelega
 struct ContentView: View {
     @StateObject private var locationManager = LocationManager()
     @State private var region = MKCoordinateRegion(
-        center: CLLocationCoordinate2D(latitude: -26.2041, longitude: 28.0473), // Johannesburg
+        center: CLLocationCoordinate2D(latitude: -26.2041, longitude: 28.0473),
         span: MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1)
     )
     @State private var status = "No request yet"
@@ -50,7 +50,7 @@ struct ContentView: View {
                         .foregroundColor(.white)
                         .frame(maxWidth: .infinity)
                         .padding()
-                        .background(Color.red)
+                        .background(Brand.purple)
                         .cornerRadius(14)
                 }
             }
