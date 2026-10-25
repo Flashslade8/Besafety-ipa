@@ -10,7 +10,14 @@ struct AuthView: View {
     var body: some View {
         ScrollView {
             VStack(spacing: 16) {
-                Text("BeSafety").font(.largeTitle.bold()).padding(.top, 40)
+                VStack(spacing: 4) {
+                    (Text("Be").foregroundColor(Brand.navy) + Text("safety").foregroundColor(Brand.purple))
+                        .font(.largeTitle.bold())
+                    Text("Safety, by your side.")
+                        .font(.subheadline)
+                        .foregroundColor(.secondary)
+                }
+                .padding(.top, 40)
 
                 Picker("", selection: $isSignUp) {
                     Text("Log in").tag(false)
@@ -56,7 +63,7 @@ struct AuthView: View {
                     .foregroundColor(.white)
                     .frame(maxWidth: .infinity)
                     .padding()
-                    .background(Color.red)
+                    .background(Brand.purple)
                     .cornerRadius(12)
                 }
                 .disabled(auth.isLoading || email.isEmpty || password.count < 6 || (isSignUp && name.isEmpty))
@@ -66,6 +73,7 @@ struct AuthView: View {
                         Task { await auth.resetPassword(email: email) }
                     }
                     .font(.footnote)
+                    .tint(Brand.purple)
                 }
 
                 HStack {
@@ -84,6 +92,7 @@ struct AuthView: View {
                         .background(Color(.secondarySystemBackground))
                         .cornerRadius(12)
                 }
+                .tint(Brand.purple)
                 .disabled(auth.isLoading)
             }
             .padding()
