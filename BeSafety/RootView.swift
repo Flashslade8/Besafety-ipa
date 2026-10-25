@@ -26,6 +26,7 @@ struct MainTabs: View {
                 .tabItem { Label("Account", systemImage: "person.circle") }
         }
         .environmentObject(store)
+        .tint(Brand.purple)
         .onAppear {
             if let uid = auth.user?.uid { store.start(uid: uid) }
         }
