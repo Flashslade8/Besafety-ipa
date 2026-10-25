@@ -42,6 +42,7 @@ struct ChatView: View {
                 } label: {
                     Image(systemName: "paperplane.fill").font(.title2)
                 }
+                .tint(Brand.purple)
                 .disabled(text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
             }
             .padding()
@@ -68,7 +69,7 @@ struct ChatView: View {
             Text(m.text)
                 .padding(10)
                 .foregroundColor(mine ? .white : .primary)
-                .background(mine ? Color.red : Color(.secondarySystemBackground))
+                .background(mine ? Brand.purple : Color(.secondarySystemBackground))
                 .cornerRadius(14)
         }
         .frame(maxWidth: .infinity, alignment: mine ? .trailing : .leading)
@@ -99,5 +100,6 @@ struct ChatView: View {
                 }
             }
         }
+        .tint(Brand.purple)
     }
 }
