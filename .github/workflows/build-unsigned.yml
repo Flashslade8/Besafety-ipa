@@ -1,0 +1,32 @@
+name: Build BeSafety (Unsigned)
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build app
+        run: |
+          xcodebuild \
+            -project BeSafety.xcodeproj \
+            -scheme BeSafety \
+            -configuration Release \
+            -sdk iphoneos \
+            -derivedDataPath build \
+            CODE_SIGNING_ALLOWED=NO CODE_SIGNING_REQUIRED=NO CODE_SIGN_IDENTITY=""
+
+      - name: Package IPA
+        run: |
+          mkdir Payload
+          cp -R build/Build/Products/Release-iphoneos/BeSafety.app Payload/
+          zip -r BeSafety.ipa Payload
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: BeSafety-ipa
+          path: BeSafety.ipa
