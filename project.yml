@@ -1,20 +1,39 @@
 name: BeSafety
 options:
   bundleIdPrefix: za.co.besafety
+packages:
+  Firebase:
+    url: https://github.com/firebase/firebase-ios-sdk
+    from: 11.0.0
+  GoogleSignIn:
+    url: https://github.com/google/GoogleSignIn-iOS
+    from: 8.0.0
 targets:
   BeSafety:
     type: application
     platform: iOS
     deploymentTarget: "16.0"
     sources: [BeSafety]
+    dependencies:
+      - package: Firebase
+        product: FirebaseAuth
+      - package: Firebase
+        product: FirebaseFirestore
+      - package: GoogleSignIn
+        product: GoogleSignIn
+    info:
+      path: Config/Info.plist
+      properties:
+        CFBundleDisplayName: BeSafety
+        UILaunchScreen: {}
+        UISupportedInterfaceOrientations: [UIInterfaceOrientationPortrait]
+        NSLocationWhenInUseUsageDescription: "BeSafety uses your location to find chaperones near you."
+        CFBundleURLTypes:
+          - CFBundleURLSchemes:
+              - "com.googleusercontent.apps.1045637329490-u2qfckukhvlb30o9717qi3db10sjvo4f"
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: za.co.besafety.app
-        GENERATE_INFOPLIST_FILE: YES
-        INFOPLIST_KEY_UIApplicationSceneManifest_Generation: YES
-        INFOPLIST_KEY_UILaunchScreen_Generation: YES
-        INFOPLIST_KEY_NSLocationWhenInUseUsageDescription: "BeSafety uses your location to find chaperones near you."
-        INFOPLIST_KEY_UISupportedInterfaceOrientations: UIInterfaceOrientationPortrait
         MARKETING_VERSION: "1.0"
         CURRENT_PROJECT_VERSION: "1"
         SWIFT_VERSION: "5.0"
